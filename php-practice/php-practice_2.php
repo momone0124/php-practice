@@ -1,7 +1,8 @@
 <?php
 // Q1 tic-tac問題
-echo "１から１００までのカウントを開始します\n\n";
+echo "１から１００までのカウントを開始します\n\n";//カウント開始のメッセージを表示
 
+//1から100まで繰り返すループ
 for($i =1; $i <=100; $i++) {
     if($i % 4 == 0 && $i % 5 == 0) {
         //4の倍数かつ５の倍数
@@ -20,6 +21,7 @@ for($i =1; $i <=100; $i++) {
 
 // Q2 多次元連想配列
 
+//複数人の個人情報（名前、メール、電話）を多次元連想配列で定義
 $personalInfos = [
     [
         'name' => 'Aさん',
@@ -41,55 +43,63 @@ $personalInfos = [
 var_dump($personalInfos);
 
 //問題１
-echo $personalInfos[1]['name'] . 'の電話番号は' . $personalInfos[1]['tel'] . 'です';
+//2番目の人の名前と電話番号を表示
+echo $personalInfos[1]['name'] . 'の電話番号は' . $personalInfos[1]['tel'] . 'です' . "\n";
 
 //問題２
+//番号をつけて、各人のメールと電話番号を一人ずつ表示
 $number = 1;
 
+//$personarlInfosの各要素（1人分の情報）を$infoに代入してループ
 foreach($personalInfos as $info) {
     echo $number . '番目の' . $info['name'] . 'のメールアドレスは' . $info['mail'] . 'で、電話番号は' . $info['tel'] . "です。\n";
     $number++; //カウンターを１ずつ増やす
 }
 
 //問題３
-
+//年齢リストを別の配列として定義（インデックスの順番が$personalInfosと対応）
 $ageList = [25,30,18];
 
-foreach ($personalInfos as $key => &$onfo) {
-    $personalInfos[$key]['age'] = $ageList[$key]; //同じインデックスを使って対応する年齢を追加
+//それぞれの人の情報にageを追加する
+foreach ($personalInfos as $key => &$info) {
+    $info['age'] = $ageList[$key]; //ageListの同じインデックスの年齢を代入
 }
 
 var_dump($personalInfos);
 
 // Q3 オブジェクト-1
 
+//Studentクラスを定義
 class Student
 {
     public $studentId;
     public $studentName;
 
+//コンストラクタ（オブジェクト生成時にIDと名前を受け取る）
     public function __construct($id, $name)
     {
         $this->studentId = $id;
         $this->studentName = $name;
     }
 
+//attendメソッド（出席したことを表示）
     public function attend()
     {
-        echo '授業に出席しました。';
+        echo '授業に出席しました。'  ."\n";
     }
 }
 
 //Studentクラスのオブジェクトを作成
 $student1 = new Student(120,'山田');
 
-echo '学籍番号' . $student1->studentid . '番の生徒は' . $student1->studentName  . 'です。';
+echo '学籍番号' . $student1->studentId . '番の生徒は' . $student1->studentName  . 'です。';
 
 
 
 // Q4 オブジェクト-2
 
-class Student
+//Student2クラスを定義
+class Student2
 {
     public $studentId;
     public $studentName;
@@ -99,36 +109,35 @@ class Student
         $this->studentId = $id;
         $this->studentName = $name;
     }
-//attendメソッドを書き換える
+//attendメソッド（授業科目を指定して出席表示する）
     public function attend($subject)
     {
-        echo $this->studentName . 'は' . $subject .  'の授業に出席しました。学籍番号:' . $this->studentId;
+        echo $this->studentName . 'は' . $subject .  'の授業に出席しました。学籍番号:' . $this->studentId . "\n";
     }
 }
 
-//オブジェクト生成
-$yamada = new Student(120,'山田');
+//Student2クラスのオブジェクト生成
+$yamada = new Student2(120,'山田');
 
-//メソッド呼び出し
+//attendメソッドを呼び出して出席情報を表示
 $yamada->attend('PHP');
 
 
 // Q5 定義済みクラス
 
 //問題１
-//現在の日付から１か月前の日付を取得
+
+//DateTimeクラスを使って現在の日付から１か月前の日付を取得して表示（例：2025-08-04)
 $date = new DateTime('-1 month');
-//出力（フォーマット：YYYY-MM-DD)
-echo $date->format('Y-m-d');
+echo $date->format('Y-m-d') . "\n";
 
 //問題２
-$today = new DateTime(); //現在の日付
-//過去の日付（例:1992年4月25日）
+
+//1992年4月25日から今日までの経過日数を計算して表示
+$today = new DateTime(); 
 $past = new DateTime('1992-04-25');
-//日付の差を計算
 $diff = $today->diff($past);
-//総日数を取得して表示
-echo 'あの日から' . $diff->days . '日経過しました。';
+echo 'あの日から' . $diff->days . '日経過しました。' . "\n";
 
 
 ?>
