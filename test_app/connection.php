@@ -42,12 +42,8 @@ function deleteTodoData($id)
     $dbh = connectPdo();
     $now = date('Y-m-d H:i:s');
 
-     $sql = 'UPDATE todos SET deleted_at = :deleted_at WHERE id = :id';
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute([
-        'deleted_at' => $now,
-        'id' => $id
-    ]);
+    $sql = 'UPDATE todos SET deleted_at = "' . $now . '" WHERE id = ' . $id;
+    $dbh->query($sql);
 
 }
 
